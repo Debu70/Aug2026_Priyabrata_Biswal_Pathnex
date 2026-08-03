@@ -1,0 +1,12 @@
+What I did today
+
+1.5 hour - watch GitHub and Create EC2 setup Video on youtube in 2x speed
+1 hour - revise Previous class content
+30 min - working on EC2 instance, connect via SSH key and some practice Linux command of previous class
+
+
+
+Tomorrow's Task
+- revise Previous class content
+- working on EC2 instance
+ 
