@@ -1,0 +1,13 @@
+What I did today
+
+1.5 hour - Revise 2 Videos Linkx on youtube in 2x speed
+2 hour - July Day 03 Linux class 
+30 min - Today August(04-08-2026) Linux Class for Public Key and Private Key Part
+15 min - working on EC2 instance, connect via SSH key and some practice Linux commands of today and previous class
+
+
+
+Tomorrow's Task
+- revise Previous class content
+- working on ps, kill .... commands 
+ 

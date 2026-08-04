@@ -1,0 +1,25 @@
+Day 01 of coding Practice
+-------------------------
+
+Install Nginix on Own Server
+-----------------------------
+
+- name: Install Nginix on ownServer 
+  hosts: all
+  become: yes
+  tasks:
+    -name: Install Nginix
+    yum:
+        name: nginix
+        state: present
+
+Docker Installation and make first own Service
+-----------------------------------------------
+
+docker --version
+docker ru n ubuntu echo "Welcome To Your Server!"
+
+dockerfile
+----------
+from ubuntu:22.04
+CMD["echo", "Welcome To Your Server!"]
