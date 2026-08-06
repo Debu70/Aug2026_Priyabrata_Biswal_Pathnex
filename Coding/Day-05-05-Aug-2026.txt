@@ -1,0 +1,89 @@
+Day 05 - Services and tags
+---------------------------
+
+Ansible - Install and Enable Nginx
+-------------------------------------
+
+
+name: Install and start Nginx on ownServer
+host: all
+become: yes
+
+tasks: 
+    name: Install nginx
+    yum:
+        name: nginx
+        state: present
+    
+    name: Enable nginx
+    service: 
+        name:nginx
+        state: started
+        enabled: yes
+
+Terraform - EC2 with Tags (r5.2xlarge)
+--------------------------------------
+
+provider "aws"{
+    region = "ap-south-1"
+}
+
+resource "aws_instance" "FirstInstance"{
+    ami = "ami-0abcd1234abcd1234"
+    instance_type = "r5.2xlarge"
+    tags = {
+        Name = "Own-Server"
+        Environment = "Training"
+        Owner = "UserName"
+    }
+
+}
+
+Kubernetes - Deployment with 2 Replicas
+----------------------------------------
+apiversion : apps/v1
+kind : Deployment
+metadata : 
+    name: username-deployment
+spec:
+    replicas : 2
+    selector:
+        matchLables:
+            app: application-name
+    template:
+        metadata:
+            lables:
+                app: application-Name
+        spec:
+            container:
+                name: app
+                image: Nginx
+                port:
+                    containerPort: 80
+
+
+
+Shell Script - Disk Usage
+--------------------------
+#!/bin/bash
+df -h
+
+Docker
+------
+Docker images and Containers
+-----------------------------
+
+docker pull ubuntu:22.04
+docker images
+docker ps -a
+
+Dockerfile
+-------------
+FROM Ubuntu:22.04
+RUN apt update
+CMD ["echo", "Welcome to Your Server!"]
+
+
+
+
+

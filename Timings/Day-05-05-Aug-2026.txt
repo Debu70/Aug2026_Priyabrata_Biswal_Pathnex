@@ -1,0 +1,13 @@
+What I did today
+
+1 hour - First 1 hour of Today Linux Class
+2 hour - July Linux Script class 
+30 min - Today August(05-08-2026) Linux Class for Public Key and Private Key Part
+1 hour - ChatGPT for some sed, tar, ps, grep, pgrep, egrep
+
+
+
+Tomorrow's Task
+- revise Previous class content
+- working on script, .sh file 
+ 
