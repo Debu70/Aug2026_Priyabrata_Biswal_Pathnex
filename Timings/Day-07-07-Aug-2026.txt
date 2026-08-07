@@ -1,0 +1,14 @@
+What I did today
+
+30 min - Today's AWS Class (Last 30 min From VPC)
+2 hour - July AWS class 
+30 min - Practice Linux Commands
+1 hour - Make Introduction Video
+1 hour - ChatGPT for some AWS interview Questions
+
+
+
+Tomorrow's Task
+- revise Previous class content of Linux 
+- Practice some Linux Commands like sed, find, grep, egrep, awk etc...
+- working on interview questions on Linux and Git 
