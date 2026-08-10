@@ -1,0 +1,87 @@
+Day - 06 - Introduction to CloudFormation and Kubernates Advanced Concept
+--------------------------------------------------------------------------
+
+Ansible - Install Docker
+------------------------
+
+```yaml
+- name : Install Docker
+hosts: all
+become: yes
+tasks:
+    - name: Install Docker
+    yum: 
+        name: docker
+        state: present
+    -name: start Docker
+    services: 
+        name: docker
+        state: started
+        enabled: yes
+
+Terraform - Pod with volume Mount
+---------------------------------
+
+apiVersion: v1
+kind: Pod
+metadata:
+    name: own-pod
+spec:
+    container:
+        -name: web
+        image: nginx
+        volumeMounts:
+            -mountPath: /usr/share/nginx/html
+            name: html-volume
+    volumes:
+        -name: html-volume
+        hostPath:
+            path: /data
+            type: Directory
+
+Shell Script - Check for Running services
+-----------------------------------------
+#!/bin/bash
+
+services=("nginx" "docker" "httpd)
+
+for service in "$(service[@])"
+do 
+    if systemctl is-active --quiet $service; then
+        echo "$service is running"
+    else 
+        echo "$service is not running"
+    if 
+done
+
+docker
+-------
+
+Node.js Application (JavaScript)
+----------------------------------
+console.log("Hello Owner");
+
+
+#Dockerfile
+
+FROM node:18
+WORKDIR /opt/owner/node-app
+Copy aap.js /opt/owner/node-app/
+CMD ["node", "/opt/owner/node-app/app.js"]
+
+
+Real Path
+--------
+/opt/owner/node-app
+
+
+
+
+
+
+
+
+
+
+
+
