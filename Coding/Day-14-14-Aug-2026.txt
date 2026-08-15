@@ -1,0 +1,117 @@
+Day 11 - Advanced Kubernetes, Jenkins, and Gitlab CI
+-----------------------------------------------------
+
+Ansible - Create Docker container for Multiple apply
+----------------------------------------------------
+
+```yaml 
+- name: Setup Docker containers for Multiple Apps
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Pull Web app Image
+      docker_images: 
+        name: my-web-app
+        source: pull
+
+    - name: Pull Database App Image
+      docker_images: 
+        name: my-database-app
+        source: pull
+    
+    - name: Run Web App Container 
+        docker_images: 
+            name: web-app
+            image: my-web-app
+            state: started
+            publish_ports:
+                - "8080:80"
+
+    - name: Run Database App Container
+      docker_container:
+        name: database_app
+        image: my-database-app
+        state: started
+        publish_ports:
+            - "3306:3306"
+
+Jenkinsfile - Build and deploy to Kubernetes
+---------------------------------------------
+
+pipeline{
+    agent any
+    environment{
+        IMAGE_NAME = 'pathnex-web-app'
+    }
+
+    stages{
+        stage('Build Docker Image'){
+            step{
+                script{
+                    docker.build("${env.IMAGE_NAME}")
+                } 
+            }
+        }
+
+        stage('Push docker Image'){
+            steps{
+                step{
+                    script{
+                        docker.withRegistry('http://docker.io', docker-credentials)
+                        docker.image("${env.IMAGE_NAME}")
+                                .push("latest")
+                    }
+                }
+            }
+        }
+        stage('Deploy to Kubernetes'){
+            steps{
+                script{
+                    sh 'kubectl apply -f deployment.yaml'
+                }
+            }
+        }
+    }    
+}
+
+
+GitLab CI/CD - Build, Push, and Deploy
+--------------------------------------
+
+stages:
+    - build
+    - push
+    - deploy
+
+build:
+    stage: build
+    script:
+        - docker build -t my-web-app . 
+
+push: 
+    stage: push
+    script: 
+        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+        - docker push my-web-app
+deploy: 
+    stage: deploy
+    script: 
+        - kubectl apply -f Kubernetes/deployment.yaml
+
+
+Docker
+------
+
+Working Directory and Copy
+--------------------------
+
+FROM ubuntu:latest
+WORKDIR /opt/own/devops-proj
+COPY . /opt/own/devops-proj/
+CMD ["ls", "-l" , "/opt/own/devops-proj"]
+
+Real path
+---------
+
+/opt/own/devops-proj
+
