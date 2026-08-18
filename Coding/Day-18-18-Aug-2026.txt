@@ -1,0 +1,122 @@
+Day - 15 : Kubernetes Advanced Concept and Multi-environment Deployments
+-------------------------------------------------------------------------
+
+Ansible - Setup Nginix with Reserve Proxy
+-----------------------------------------
+
+```yaml
+
+- name: Setup Nginix with Reverse Proxy
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Install Nginix
+      yum: 
+        name: Nginix
+        state: present
+    - name: Configure nginix asreverse Proxy
+      template: 
+        src: reverse-proxy.conf.j2
+        dest: /etc/nginx/conf.d/reverse-proxy.conf
+    - name: Restart nginix service 
+      service: 
+        name: nginix
+        started: restarted
+        enabled: yes
+
+Terraform - Create s3 Bucket with Versioning and Logging
+---------------------------------------------------------
+
+resource "aws_s3_bucket" "own_bucket"{
+    bucket = "own-bucket"
+    versioning{
+        enabled = true
+    }
+
+    logging{
+        target_bucket = "own-log-bucket"
+        target_prefix = "log/"
+    }
+}
+
+kubernetes - Ingress with Nginix Controller
+-------------------------------------------
+apiVersioning: networking.k8s.io/v1
+kind: Ingress
+metadat:
+    name: own-ingress
+    annotation:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+spec: 
+    rules:
+        - host: own.local
+          http: 
+            paths:
+                - path: /
+                    pathType: Prefix
+                    backend: 
+                        services: 
+                            name: own-service
+                            port:
+                                number: 80
+
+Jenkinsfiles - Build, Test, and Deploy with Stages
+---------------------------------------------------
+
+pipeline{
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                echo 'Building Docker image....'
+                docker.build('own-web-app')
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'Running Tests ....'
+            }
+        }
+        stage('Deploy to Kubernetes'){
+            steps{
+                script{
+                    sh 'kubctl apply -f kubernetes/deployments.yaml'
+                }
+            }
+        }
+    }
+}
+
+Github CI/CD - Multi-stage Deployment with Helm
+------------------------------------------------
+
+stage:
+    - buils
+    - push
+    - deploy
+
+build:
+    stage: build 
+    script:
+        - docker build -t own-web-app .
+push:
+    stage: push
+    script:
+        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+        - docker push own-web-app
+
+deploy: 
+    stage: Deploy
+    script:
+        - helm upgrade --install own-nginx own/nginix-ingress
+
+
+docker
+-------
+
+# CMD vs ENTRYPOINT
+
+From ubuntu:latest
+ENTRYPOINT ['echo']
+cmd ["hello welcome !"]
+

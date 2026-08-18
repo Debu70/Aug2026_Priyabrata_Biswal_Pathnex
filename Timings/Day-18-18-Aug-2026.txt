@@ -1,0 +1,16 @@
+What I did today
+
+
+1.5 hour - Practice Some Terraform cmd nad Helm Chart
+1 hour - Revise Today's Topic and make note (From PDF)
+1 hour - AWS Amazon Linux kubectl cmd. Practice and Helm cmd. 
+1 hour - ChatGPT for some Helm concepts
+20 min - Create Today's Introduction Video
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS with Helm and Terraform 
+- English Learning

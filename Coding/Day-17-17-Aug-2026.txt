@@ -1,0 +1,172 @@
+Day 14 : Advanced Automation with CloudFormation and CI/CD 
+--------------------------------------------------------------
+
+Ansible - Multi-Node Nginx Setup
+---------------------------------
+
+- name: Setup Nginx on multiple Note
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Install Nginx
+      yum: 
+        name: nginx
+        state: present
+    - name: Start nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+
+Terraform - Create IAM Users and Policies
+-----------------------------------------
+
+resouces "aws_iam_user" "example_user"{
+    name = "own_user"
+}
+
+resouces "aws_iam_policy" "example_policy"{
+    name="own-policy"
+    description = "Policy for own application"
+    policy = jsonencode({
+        version = "2012-10-25"
+        Statement = [
+            {
+            Action = "s3.ListBucket"
+            Efect = "Allow"
+            Resources = "arn:aws:s3:::pathnex-bucket"
+            },
+        ]
+    })
+}
+
+Kubernetes - Deploy Nginx with configMap and Secrets
+-----------------------------------------------------
+
+apiVersion : v1
+kind : configMap
+metadata:
+    name: nginx-config
+data:   
+    nginx.conf: |
+        server{
+            listen 80;
+            server_name localhost;
+            location / {
+                root /usr/share/nginx/html;
+                index index.html index.html;
+            }
+        }
+
+---
+
+apiVersion: v1
+kind: Secrets
+metadata:
+    name: nginx-secret
+type: Opaque
+data: 
+    password: vgubhinjmk-
+
+---
+
+
+
+apiVersion: app/v1
+kind: Deployment
+metadata:
+    name: own-nginx
+spec:
+    replicas: 2
+    selector:
+        metaLabels:
+            app: own-nginx
+    template:
+        metadata:
+            labels:
+                app: own-nginx
+        spec: 
+            container:
+                - name: nginx
+                  image: nginx
+                  volumeMounts:
+                    - mountPath: /etc/nginx/nginx.conf
+                      name: nginx-config
+                      subPath: nginx.conf
+            volume:
+             - name: nginx-config
+               configMap: 
+                 name: nginx-config
+            - name: nginx-secret
+              secret: 
+                secretName: nginx-secret
+
+
+Jenkinsfilee - Multi-Brand Pipeline with Docker Build
+--------------------------------------------------
+
+Pipeline{
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                script{
+                    docker.build('own-app')
+                }
+            }
+        }
+
+        stage('Deploy'){
+            steps{
+                sript{
+                    kubectl apply -f Kubernetes/deployment.yaml
+                }
+            }
+        }
+    }
+}
+
+GitHub CI/CD - Advances Deployment with Helm
+--------------------------------------------
+
+stage: 
+    - Build
+    - Push
+    - Deploy
+
+build:
+    stage: build
+    script:
+        - docker build -t own-web-app .
+
+push:
+    stage: push
+    script:
+        - docker push -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+        - docker push own-web-app
+
+deploy:
+    stage: deploy
+    script:
+        - helm repo add own-app https://chart.own.com
+        - helm install own-nginx own/nginx-ingress
+
+
+docker
+------
+# COPY vs ADD
+-------------
+
+From ubuntu
+COPY own-file.txt /opt/pathnex/files/
+add own.tar.gz /opt/pathnex/extracted
+
+
+
+
+
+
+
+
+
