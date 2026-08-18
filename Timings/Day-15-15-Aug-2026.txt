@@ -1,0 +1,14 @@
+What I did today
+
+1 hour - Some hands-on in AWS EKS (Create Cluster, explore some version k8s ... etc)
+1 hour - Revise Today's Topic and make note (From PDF)
+1 hour - AWS Amazon Linux kubectl cmd. Practice
+1.5 hour - ChatGPT for K8S (Affinity, Taint, Tolerant)
+
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS
+- English Learning
