@@ -1,0 +1,14 @@
+What I did today
+
+2.5 hour - Create import.tf file and create a scratch Terraform folder for creation for EKS cluster 
+1 hour - AWS Amazon Linux kubectl cmd. and Terraform cmd. Practice
+2 hour - ChatGPT for some Linux and K8S concepts and Make Terraform .tf file
+20 min - Make Introduction video
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS
+- English Learning

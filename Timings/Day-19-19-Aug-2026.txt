@@ -1,0 +1,14 @@
+What I did today
+
+
+1.5 hour - Watch Today ArgoCD class
+1 hour - Practice Some Hands-on
+20 min - Create Today's Introduction Video
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS with Helm and Terraform 
+- English Learning
