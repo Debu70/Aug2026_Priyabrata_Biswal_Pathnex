@@ -1,0 +1,16 @@
+What I did today
+
+
+4 hour - Watch Today Terraform class
+1.5 hour - Create a new EC2 Instance by terraform and add Ansible with python3 and add a task like install and start Apache2
+1 hour - chatgpt for Ansible stuffs
+20 min - create day introduction video
+1 hour - Practice Some Hands-on cmd.s on both terraform and Ansible
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS with Helm and Terraform 
+- English Learning     
