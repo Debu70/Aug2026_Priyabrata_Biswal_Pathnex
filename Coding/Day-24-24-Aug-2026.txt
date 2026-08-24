@@ -1,0 +1,138 @@
+##########################################################
+# Day 21 - Security, Hardening and Compliance
+##########################################################
+
+##########################################################
+# Ansible - Configure Firewall with iptables
+##########################################################
+
+
+- name: Configure Firewall with iptables
+  hosts: all
+  become: yes
+  tasks: 
+    - name: Set default politics to drop all traffics
+      command: iptables -P INPUT DROP
+    - name: Allow SSH and HTTP traffics
+      command: iptables -A INPUT -p top --dport 22 -j ACCEPT
+      command: iptables -A INPUT -p top --dport 80 -j ACCEPT
+    - name: save iptables Configuration
+      command: service iptables save
+
+##########################################################
+# Terraform  - Configure Security Group for EC2
+##########################################################
+
+resource "aws_security_group" "own_sg"{
+    name_prefix = "own_sg"
+    description = "Allow SSH and HTTP"
+
+    ingress{
+        from_port = 22
+        to_port = 22
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+    ingress{
+        from_port = 80
+        to_port = 80
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+}
+
+##########################################################
+# Kubernetes - RBAC Configuration for Access Control
+##########################################################
+
+apiVersio: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+    name: own-cluster-admin
+subjects:
+    - kind: User
+      name: own-user
+      apiGroup: rbac.authorization.k8s.io
+roleref:
+    kind: ClusterRole
+    name: cluster-main
+    apiGroup: rbac.authorization.k8s.io
+
+##########################################################
+# Jenkins - Secure Credentials Management
+##########################################################
+
+pipeline{
+    agent any
+    environment{
+        REGISTRY_PASSWORD = Credentials('docker-registry-password')
+    }
+    stages{
+        stage('Build){
+            steps{
+                echo 'Build Docker images ....'
+                docker.build(own-web-app)
+            }
+        }
+        stage('Push'){
+            steps{
+                script{
+                    docker.withRegistry('https://docker.io', 'docker-Credentials'){
+                        docker.image('own-web-app').push('latest')
+                    }
+                }
+            }
+        }
+        stage('deploy'){
+            steps{
+                script{
+                    sh 'kubectl apply -f Kubernetes/Deployment.yaml'
+                    sh 'kubectl get pods -w'
+                }
+            }
+        }
+    }
+}
+
+##########################################################
+# GitLab CI/CD — Secure Deployment with Secrets Management
+##########################################################
+
+stages:
+    - build
+    - push
+    - deploy
+
+build: 
+    stage:build
+    scripts:
+        - docker build -t own-app .
+push:
+    stage: push
+    script:
+        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+        - docker push own-app
+deploy:
+    stage: deploy
+    script:
+        - kubectl apply -f Kubernetes/Deployment.yaml
+        - kubectl get pods -w
+
+##########################################################
+# Docker
+##########################################################
+##########################################################
+#Docker Networking
+##########################################################
+
+docker network create own-network
+docker run -dit --name c1 --network own-network ubuntu
+docker run -dit 00name c2 --network own-network ubuntu
+
+
+
+
+
+
+
+

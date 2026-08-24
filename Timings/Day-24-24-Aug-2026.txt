@@ -1,0 +1,13 @@
+What I did today
+
+2 hour - Practice Jenkins Practical
+20 min - create day introduction video
+1 hour - Practice Some Hands-on cmd.s on both terraform and Ansible
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS with Helm and Terraform 
+- English Learning     
