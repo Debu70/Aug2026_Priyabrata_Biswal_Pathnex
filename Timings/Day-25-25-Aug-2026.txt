@@ -1,0 +1,12 @@
+What I did today
+
+1 hour - Make Notes for Evening Class on Monitoring
+20 min - create day introduction video
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS with Helm and Terraform 
+- English Learning     
