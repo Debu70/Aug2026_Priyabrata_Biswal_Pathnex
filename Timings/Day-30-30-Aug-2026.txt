@@ -1,0 +1,13 @@
+What I did today
+
+1.5 hour - Watch Today's DevSecOps class
+1 hour - Make Notes for Evening Class on ELK Stack
+40 min - Make Introduction Video
+20 min - English Learning(Shadowing)
+
+
+Tomorrow's Task
+- revise Previous class content of AWS
+- Practice Linux Commands
+- Practice some hands-on in EKS with Helm and Terraform 
+- English Learning     
